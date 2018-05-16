@@ -3,7 +3,7 @@ _send em tiny_ is a Windows utility to make it easy to configure keyboards and m
 
 Motivation: It was too difficult to configure my mouse to send an emdash (—), so I made this tiny program to make it easier to send it or any other Unicode character.
 
-The mouse/keyboard configuration tool from a hardware vendor typically allows you to customize macro keys/buttons, but they make it overly difficult to have a simple Unicode character assignment. For example, em dash (—) or an eomji tiger (🐯) cannot simply be assigned to a macro key/button in Razer Synapse nor Logitech SetPoint. You can't paste the Unicode character or emoji anywhere and you can't enter the Unicode hexcode. _Send Em Tiny_ is designed to work with these utilities to add the ability to send a Unicode character from a key or button press.
+The mouse/keyboard configuration tool from a hardware vendor typically allows you to customize macro keys/buttons, but they make it overly difficult to have a simple Unicode character assignment. For example, em dash (—) or an emoji tiger (🐯) cannot simply be assigned to a macro key/button in Razer Synapse nor Logitech SetPoint. You can't paste the Unicode character or emoji anywhere and you can't enter the Unicode hexcode. _Send Em Tiny_ is designed to work with these utilities to add the ability to send a Unicode character from a key or button press.
 
 # What hardware does it work with?
 
