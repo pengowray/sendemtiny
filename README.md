@@ -3,13 +3,13 @@ _send em tiny_ is a Windows utility to make it easy to configure keyboards and m
 
 Motivation: It was too difficult to configure my mouse to send an emdash (—), so I made this tiny program to make it easier to send it or any other Unicode character.
 
-The mouse/keyboard configuration tool from a hardware vendor typically allows you to customize macro keys/buttons, but does not allow a simple Unicode character assignment. For example, em dash (—) or tiger (🐯) cannot simply be assigned to a macro key/button in Razer Synapse, Logitech Keyboard and Mouse Settings, nor Corsair Utility Engine. You can't paste the Unicode character or emoji anywhere and you can't enter the Unicode hexcode. _Send Em Tiny_ is designed to work with these utilities to send a Unicode character.
+The mouse/keyboard configuration tool from a hardware vendor typically allows you to customize macro keys/buttons, but they make it overly difficult to have a simple Unicode character assignment. For example, em dash (—) or an eomji tiger (🐯) cannot simply be assigned to a macro key/button in Razer Synapse, Logitech SetPoint, nor Corsair Utility Engine. You can't paste the Unicode character or emoji anywhere and you can't enter the Unicode hexcode. _Send Em Tiny_ is designed to work with these utilities to add the ability to send a Unicode character from a key or button press.
 
 # What hardware does it work with?
 
 Tested with: 
 * ✅ Razer Synapse (Razer Naga Epic Chroma) Win10
-* ✅ Logitech Keyboard and Mouse Settings (MK700) Win10
+* ✅ Logitech SetPoint (MK700) Win10
 * ✅ Corsair Utility Engine (Strafe RGB) Win7
 * ❌ Asus Strix Software (Strix Tactic Pro) Win10 — the current app loses focus when _send em tiny_ is run
 * ❓ Valve controller (will test shortly)
@@ -17,7 +17,7 @@ Tested with:
 
 # How to use it
 
-1. Copy `sendemtiny.exe` to somewhere, e.g. `c:\send-em`
+1. Copy `sendemtiny.exe` somewhere, e.g. `c:\send-em`
 2. Make a bunch of copies of it
 3. Find the Unicode hex code you want to use, e.g. `U+2014` for the _em dash_ (—)
 4. Rename one of the files so it ends with a capital **U** followed by the hexcode, e.g. "emdash U2014.exe" (If `.exe` is hidden, then no need to add it)
@@ -31,9 +31,11 @@ When _Send Em Tiny_ is run by your keyboard or mouse driver, it searches its own
 Why this way? No keyboard/mouse utility software that I tested allows a command line parameter, so renaming the executable is the best way I could find to allow you to choose which Unicode character to send.
 
 # Is there another way that doesn't use any third party software like _send em tiny_?
-Yes, you can typically set up a macro to type the [Alt Code](https://en.wikipedia.org/wiki/Alt_code). This tends to be inelegant and error prone. It may mess up if your numlock is currently disabled, if other applications—such as f.lux—are override alt-keys with its own global shortcuts, or if you choose the wrong delay between key presses.
+Yes, you can typically set up a macro to type the [Alt Code](https://en.wikipedia.org/wiki/Alt_code). This tends to be inelegant and error prone. It may mess up if your numlock is currently disabled, if another applications—such as f.lux—overrides alt-keys with its own global shortcuts, or if you choose the wrong delay between key presses.
 
-Here's an example:
+However, you might macros are a beter solution for you. Here's an example of an emdash macro in Razer Synapse (does not require _send em tiny_):
+
+[image]
 
 # Roadmap
 
