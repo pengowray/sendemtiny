@@ -1,15 +1,87 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Forms;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Net;
+using System.IO;
+using System.Threading;
 
 namespace sendemtiny {
     class Program {
         static void Main(string[] args) {
 
-            string appName = System.Diagnostics.Process.GetCurrentProcess().ProcessName; // the name of the application (without the path nor ".exe")
-            string codePoint = appName.Substring(appName.LastIndexOf('U') + 1); // Take everything after a capital U
-            int code = int.Parse(codePoint, System.Globalization.NumberStyles.HexNumber); // Convert the hex to an int
-            string unicodeString = char.ConvertFromUtf32(code); // Create a Unicode character string
+            string appName = Process.GetCurrentProcess().ProcessName; // the name of the application (without the path nor ".exe")
 
-            SendKeys.SendWait(unicodeString); // Send it
+            var regex = new Regex(@"[Uu][+-]?(?<hex>[0-9A-Fa-f]{2,})|say\W(?<say>.*)|copy\W(?<copy>.*)|type\W(?<type>.*)|(?<entity>&(?:[a-z\d]+|#\d+|#x[a-f\d]+);)|(?<time>(?<num>\d+(?:\.\d+)?)\W*(?<unit>s|ms))");
+            var matches = regex.Matches(appName);
+
+            string sendText = "";
+
+            foreach (Match match in matches) {
+                if (TryGetGroupValue(match, "hex", out var hex))
+                    sendText += HexToUnicode(hex);
+
+                if (TryGetGroupValue(match, "entity", out var entity))
+                    sendText += WebUtility.HtmlDecode(entity);
+
+                if (TryGetGroupValue(match, "say", out var say))
+                    sendText += say;
+
+                if (TryGetGroupValue(match, "copy", out var copy))
+                    Clipboard.SetText(copy);
+
+                if (TryGetGroupValue(match, "time", out var time)) {
+                    TryGetGroupValue(match, "num", out var num);
+                    TryGetGroupValue(match, "unit", out var unit);
+                    //sendText += $"{num} {unit}"; // debug
+                    double number = double.Parse(num);
+                    if (unit == "s") {
+                        TimeSpan timespan = TimeSpan.FromSeconds(number);
+                        Thread.Sleep(timespan);
+                    } else {
+                        TimeSpan timespan = TimeSpan.FromMilliseconds(number);
+                        Thread.Sleep(timespan);
+                    }
+                }
+
+                if (TryGetGroupValue(match, "type", out var filepath)) {  
+                    string exepath = Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory);
+                    var fullpath = Path.GetFullPath(Path.Combine(exepath, filepath));
+
+                    if (!fullpath.Contains(exepath)) {
+                        // don't allow to go read files higher than this exe's path
+                        return;
+                    }
+
+                    if (!File.Exists(fullpath))
+                        continue;
+
+                    string readText = File.ReadAllText(fullpath);
+                    sendText += readText;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(sendText)) {
+                SendKeys.SendWait(sendText);
+                //SendKeys.Flush(); // unneeded?
+            }
+        }
+
+        static bool TryGetGroupValue(Match match, string group, out string value) {
+            if (match.Groups[group].Success) {
+                value = match.Groups[group].Value;
+                return true;
+            }
+
+            value = null;
+            return false;
+        }
+
+        static string HexToUnicode(string codePoint) {
+            int code = int.Parse(codePoint, NumberStyles.HexNumber);
+            string unicodeString = char.ConvertFromUtf32(code);
+            return unicodeString;
         }
     }
 }

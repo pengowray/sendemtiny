@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9A2F06ED-8AD4-44D8-8FF3-25858255EBF8}</ProjectGuid>
+    <ProjectGuid>{19C93148-2DCA-4280-A129-B0A4562164AD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>sendemtiny</RootNamespace>
-    <AssemblyName>sendemtiny</AssemblyName>
+    <RootNamespace>sendemmicro</RootNamespace>
+    <AssemblyName>sendemmicro</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>sendemtiny.Program</StartupObject>
+    <StartupObject>sendemmicro.SendEmMicro</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +40,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="SendEmMicro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
