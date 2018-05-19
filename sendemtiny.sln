@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "send_em_tiny", "send_em_tiny.csproj", "{9A2F06ED-8AD4-44D8-8FF3-25858255EBF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "send_em_tiny", "src\send_em_tiny.csproj", "{9A2F06ED-8AD4-44D8-8FF3-25858255EBF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "send_em_micro", "..\src-micro\send_em_micro.csproj", "{19C93148-2DCA-4280-A129-B0A4562164AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "send_em_micro", "src-micro\send_em_micro.csproj", "{19C93148-2DCA-4280-A129-B0A4562164AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
