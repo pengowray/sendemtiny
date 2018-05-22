@@ -10,13 +10,16 @@ using System.Threading;
 namespace sendemtiny {
     class Program {
         static void Main(string[] args) {
-
             string appName = Process.GetCurrentProcess().ProcessName; // the name of the application (without the path nor ".exe")
+            new Program().ParseAndRun(appName);
+        }
 
+
+        string sendText = "";
+
+        public void ParseAndRun(string command) { 
             var regex = new Regex(@"[Uu][+-]?(?<hex>[0-9A-Fa-f]{2,})|say\W(?<say>.*)|copy\W(?<copy>.*)|type\W(?<type>.*)|(?<entity>&(?:[a-z\d]+|#\d+|#x[a-f\d]+);)|(?<time>(?<num>\d+(?:\.\d+)?)\W*(?<unit>s|ms))");
-            var matches = regex.Matches(appName);
-
-            string sendText = "";
+            var matches = regex.Matches(command);
 
             foreach (Match match in matches) {
                 if (TryGetGroupValue(match, "hex", out var hex))
@@ -34,6 +37,10 @@ namespace sendemtiny {
                 if (TryGetGroupValue(match, "time", out var time)) {
                     TryGetGroupValue(match, "num", out var num);
                     TryGetGroupValue(match, "unit", out var unit);
+
+                    //send buffer before waiting
+                    SendText();
+
                     //sendText += $"{num} {unit}"; // debug
                     double number = double.Parse(num);
                     if (unit == "s") {
@@ -62,10 +69,15 @@ namespace sendemtiny {
                 }
             }
 
+            SendText();
+        }
+
+        public void SendText() {
             if (!string.IsNullOrEmpty(sendText)) {
                 SendKeys.SendWait(sendText);
-                //SendKeys.Flush(); // unneeded?
+                SendKeys.Flush(); // might not be needed?
             }
+            sendText = "";
         }
 
         static bool TryGetGroupValue(Match match, string group, out string value) {
