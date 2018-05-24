@@ -18,7 +18,7 @@ namespace sendemtiny {
         string sendText = "";
 
         public void ParseAndRun(string command) { 
-            var regex = new Regex(@"[Uu][+-]?(?<hex>[0-9A-Fa-f]{2,})|say\W(?<say>.*)|copy\W(?<copy>.*)|type\W(?<type>.*)|(?<entity>&(?:[a-z\d]+|#\d+|#x[a-f\d]+);)|(?<time>(?<num>\d+(?:\.\d+)?)\W*(?<unit>s|ms))");
+            var regex = new Regex(@"[Uu][+-]?(?<hex>[0-9A-Fa-f]{2,})|say\W(?<say>.*)|type\W(?<type>.*)|(?<entity>&(?:[a-z\d]+|#\d+|#x[a-f\d]+);)|(?<time>(?<num>\d+(?:\.\d+)?)\W*(?<unit>s|ms))");
             var matches = regex.Matches(command);
 
             foreach (Match match in matches) {
@@ -30,9 +30,6 @@ namespace sendemtiny {
 
                 if (TryGetGroupValue(match, "say", out var say))
                     sendText += say;
-
-                if (TryGetGroupValue(match, "copy", out var copy))
-                    Clipboard.SetText(copy);
 
                 if (TryGetGroupValue(match, "time", out var time)) {
                     TryGetGroupValue(match, "num", out var num);
