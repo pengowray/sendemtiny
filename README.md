@@ -23,7 +23,7 @@ Tested with:
 
 # Features
 
-_send em tiny_ is full-featured solution and is generally recommended. But if you only need to send a single Unicode character, you might prefer _send em micro_. It gives maximum performance and a smaller, more stable code base. Both executables are found under [/release](https://github.com/quole/sendemtiny/tree/master/release).
+_send em tiny_ is the full-featured solution and is generally recommended. But if you only need to send a single Unicode character, you might prefer _send em micro_. It gives maximum performance and a smaller, more stable code base. Both executables are found under [/release](https://github.com/quole/sendemtiny/tree/master/release).
 
 | Feature | Example | _send em tiny_ | _send em micro_ |
 | --- | --- | --- | --- | 
